@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:jurni_test/utils/size_utils.dart';
 import 'package:jurni_test/utils/theme_helper.dart';
 
+/// Custom text field with multiple functionality used commonly throughout
+/// the application
 class CustomTextField extends StatefulWidget {
   final String? title;
   final String? hintText;

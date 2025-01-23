@@ -33,27 +33,6 @@ class _ProfilePageState extends State<ProfilePage> {
     initValues();
   }
 
-  void setBusy(bool value) {
-    if (!mounted) return;
-    setState(() {
-      isBusy = value;
-    });
-  }
-
-  void initValues() async {
-    userData = widget.userData;
-
-    /// If some how user is null get from the local shared preferences
-    if (userData == null) {
-      final userString = PrefUtils().getString(Constants.firebaseUser);
-      if (userString.isNotEmpty) {
-        userData = UserData.fromJson(jsonDecode(userString));
-      }
-    }
-
-    setState(() {});
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -96,9 +75,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           physics: const NeverScrollableScrollPhysics(),
                           itemBuilder: (_, index) {
                             final item = list[index];
-
                             String? value;
-
                             switch (index) {
                               case 0:
                                 value = userData?.goals;
@@ -113,10 +90,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                 value = userData?.cooking;
                                 break;
                               case 4:
-                                value = "${userData?.age} yrs, ${userData?.weight} lbs";
+                                value =
+                                    "${userData?.age} yrs, ${userData?.weight} lbs";
                                 break;
                             }
-
                             return _bottomView(
                               title: item.title!,
                               question: item.question!,
@@ -149,6 +126,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
+  /// Widget which separates out the bottom View.
   Widget _bottomView({
     required String question,
     String? answer,
@@ -160,7 +138,8 @@ class _ProfilePageState extends State<ProfilePage> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
       margin: const EdgeInsets.symmetric(vertical: 10),
-      decoration: BoxDecoration(color: appTheme.lightGrey, borderRadius: BorderRadius.circular(15)),
+      decoration: BoxDecoration(
+          color: appTheme.lightGrey, borderRadius: BorderRadius.circular(15)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -200,6 +179,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
+  /// Widget which gives the common view for the answers
   Widget _answerWidget({required String answer}) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
@@ -221,6 +201,28 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
       ),
     );
+  }
+
+  /// List of different functions for the click events, setter-getter
+  void initValues() async {
+    userData = widget.userData;
+
+    /// If some how user is null get from the local shared preferences
+    if (userData == null) {
+      final userString = PrefUtils().getString(Constants.firebaseUser);
+      if (userString.isNotEmpty) {
+        userData = UserData.fromJson(jsonDecode(userString));
+      }
+    }
+
+    setState(() {});
+  }
+
+  void setBusy(bool value) {
+    if (!mounted) return;
+    setState(() {
+      isBusy = value;
+    });
   }
 
   void _logout() async {

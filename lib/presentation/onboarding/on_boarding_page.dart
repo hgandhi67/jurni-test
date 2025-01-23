@@ -30,13 +30,6 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
 
   final list = Constants.questions.toList();
 
-  void setBusy(bool value) {
-    if (!mounted) return;
-    setState(() {
-      isBusy = value;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<UserDataCubit, UserDataState>(
@@ -267,6 +260,15 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         ],
       ),
     );
+  }
+
+
+  /// List of different functions for the click events, setter-getter
+  void setBusy(bool value) {
+    if (!mounted) return;
+    setState(() {
+      isBusy = value;
+    });
   }
 
   void _onNextButtonClick() async {

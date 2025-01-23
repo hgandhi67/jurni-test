@@ -10,6 +10,7 @@ import 'presentation/signup/sign_up_page.dart';
 class AppRoutes {
   static final GlobalKey<NavigatorState> _rootNavigator = GlobalKey(debugLabel: 'root');
 
+  /// Router function creates the routes for the entire application
   static final GoRouter router = GoRouter(
     navigatorKey: _rootNavigator,
     debugLogDiagnostics: true,

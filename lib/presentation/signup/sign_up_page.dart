@@ -29,20 +29,6 @@ class _SignUpPageState extends State<SignUpPage> {
   bool isBusy = false;
   bool isBusyFetching = true;
 
-  void setBusy(bool value) {
-    if (!mounted) return;
-    setState(() {
-      isBusy = value;
-    });
-  }
-
-  void setBusyFetching(bool value) {
-    if (!mounted) return;
-    setState(() {
-      isBusyFetching = value;
-    });
-  }
-
   @override
   void initState() {
     super.initState();
@@ -61,7 +47,6 @@ class _SignUpPageState extends State<SignUpPage> {
         }
       } else {
         setBusyFetching(false);
-
         /// Do nothing user is not logged in yet
       }
     });
@@ -208,6 +193,7 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
+  /// List of different functions for the click events, setter-getter
   void _onSignUpClicked() async {
     final validation = Validation();
     if (validation.validateEmail(_emailController.text) == null &&
@@ -220,6 +206,20 @@ class _SignUpPageState extends State<SignUpPage> {
       );
       setBusy(false);
     }
+  }
+
+  void setBusy(bool value) {
+    if (!mounted) return;
+    setState(() {
+      isBusy = value;
+    });
+  }
+
+  void setBusyFetching(bool value) {
+    if (!mounted) return;
+    setState(() {
+      isBusyFetching = value;
+    });
   }
 
   @override

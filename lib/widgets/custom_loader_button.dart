@@ -3,6 +3,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:jurni_test/utils/size_utils.dart';
 import 'package:jurni_test/utils/theme_helper.dart';
 
+/// Common button widget which provides the button with a loader
 class CustomLoadingButton extends StatelessWidget {
   final Function? onPressed;
   final String title;
